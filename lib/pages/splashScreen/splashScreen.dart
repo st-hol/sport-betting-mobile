@@ -1,5 +1,5 @@
-import 'package:banking_app/pages/landingPage/landingPage.dart';
 import 'package:flutter/material.dart';
+import 'package:sport_betting_mobile/pages/landingPage/landingPage.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   changeScreen() async {
-    await Future.delayed(new Duration(seconds: 5));
+    await Future.delayed(new Duration(seconds: 3));
     setState(() {
       started = true;
     });
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
               image: AssetImage('assets/blue.jpg'), fit: BoxFit.cover),
         ),
         child: Center(
-          child: Image.asset('assets/applogo.png'),
+          child: Image.asset('assets/applogo2.png'),
         ),
       ),
     );
