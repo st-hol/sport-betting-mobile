@@ -1,67 +1,22 @@
 import "package:flutter/material.dart";
+import 'package:sport_betting_mobile/api/payload/AccountApi.dart';
 
-// void main() => runApp(new MyApp() );
-//
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return new MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: "simple login",
-//       home: new MainActivity(),
-//     );
-//   }
-// }
+class LoginScreen extends StatefulWidget {
+  final AccountApi accountApi = AccountApi();
 
-
-class LoginPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-
+class _LoginScreenState extends State<LoginScreen> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   @override
   Widget build(BuildContext context) {
 
-    final emailField = TextField(
-      obscureText: false,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Email",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-    final passwordField = TextField(
-      obscureText: true,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Password",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-    final loginButon = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff01A0C7),
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {},
-        child: Text("Login",
-            textAlign: TextAlign.center,
-            style: style.copyWith(
-                color: Colors.white, fontWeight: FontWeight.bold)),
-      ),
-    );
-
     return Scaffold(
       body: Directionality(
-        textDirection: TextDirection.rtl,
+        textDirection: TextDirection.ltr,
         child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -72,16 +27,14 @@ class _LoginPageState extends State<LoginPage> {
                   height: 200,
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
-                          colors: <Color>[
-                            Colors.redAccent,
-                            Colors.blueAccent
-                          ],
+                          colors: <Color>[Colors.redAccent, Colors.blueAccent],
                           begin: Alignment.topLeft,
-                          end: Alignment.bottomRight
-                      )
-                  ),
+                          end: Alignment.bottomRight)),
                   child: new Center(
-                    child: new Icon(Icons.lock_outline,size: 40,),
+                    child: new Icon(
+                      Icons.lock_outline,
+                      size: 40,
+                    ),
                   ),
                 ),
                 new ListView(
@@ -93,51 +46,60 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(60),
-                              topRight: Radius.circular(60)
-                          )
-                      ),
-
+                              topRight: Radius.circular(60))),
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: new Column(
-
                           children: <Widget>[
-                            Container(height: 40,),
+                            Container(
+                              height: 40,
+                            ),
                             TextField(
                               decoration: InputDecoration(
-                                hintText: "نام کاربری",
+                                hintText: "login",
                                 icon: Icon(Icons.person_outline),
                               ),
                             ),
-                            Container(height: 40,),
+                            Container(
+                              height: 40,
+                            ),
                             TextField(
                               decoration: InputDecoration(
-                                hintText: "رمز عبور",
+                                hintText: "password",
                                 icon: Icon(Icons.lock_outline),
                               ),
                             ),
-                            SizedBox(height: 40,),
+                            SizedBox(
+                              height: 40,
+                            ),
                             InkWell(
-                              onTap: (){
-                                print("ok");
+                              onTap: () {
+                                _attemptLogin(context);
                               },
                               child: new Container(
                                 width: 300,
                                 height: 50,
                                 decoration: BoxDecoration(
-                                    color: Colors.blueAccent,
-                                    borderRadius: BorderRadius.all(Radius.circular(60))
-                                ),
+                                    color: Colors.redAccent,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(60))),
                                 child: Center(
-                                    child: new Text("ورود",
-                                      style: TextStyle(color: Colors.white,fontSize: 23,fontWeight: FontWeight.bold)
-                                      ,)
-                                ),
+                                    child: new Text(
+                                  "submit",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 23,
+                                      fontWeight: FontWeight.bold),
+                                )),
                               ),
                             ),
-                            new SizedBox(height: 10,),
-                            new Text("رمز عبورت رو فرامش کردی؟"),
-                            new SizedBox(height: 40,),
+                            new SizedBox(
+                              height: 10,
+                            ),
+                            // new Text(""),
+                            new SizedBox(
+                              height: 40,
+                            ),
                             new Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -146,35 +108,17 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 60,
                                   decoration: BoxDecoration(
                                     color: Colors.grey[300],
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(60)
-                                    ),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(60)),
                                   ),
                                   child: new Center(
                                     child: new Icon(
-                                      Icons.fingerprint,
-                                      color:Colors.grey[700] ,
+                                      Icons.arrow_downward,
+                                      color: Colors.grey[700],
                                     ),
                                   ),
                                 ),
-                                SizedBox(width: 50,),
-                                new Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(100)
-                                    ),
-                                  ),
-                                  child: new Center(
-                                    child: new Icon(
-                                      Icons.face,
-                                      color:Colors.grey[700] ,
-                                    ),
-                                  ),
-                                ),
-
+                                new SizedBox()
                               ],
                             ),
                           ],
@@ -184,9 +128,18 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 )
               ],
-            )
-        ),
+            )),
       ),
     );
+  }
+
+  void _attemptLogin(BuildContext context) {
+    print("attempt log in");
+    if (widget.accountApi.processLoginRequest(context)) {
+      print("log in success");
+    } else {
+      print("log in failed");
+      //todo show error msg
+    }
   }
 }

@@ -23,13 +23,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     if (started == true) {
-      return LandingPage();
+      return LandingScreen();
     }
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/blue.jpg'), fit: BoxFit.cover),
+              image: AssetImage('assets/pinkredfon.png'), fit: BoxFit.cover),
         ),
         child: Center(
           child: Image.asset('assets/applogo2.png'),
