@@ -7,8 +7,8 @@ class PopulateDrawer {
         children: <Widget>[
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(color: Colors.pink),
-            accountName: Text("Abass Makinde"),
-            accountEmail: Text("abs@gmail.com"),
+            accountName: Text("Stanislav"),
+            accountEmail: Text("st-hol@gmail.com"),
             currentAccountPicture: GestureDetector(
               child: CircleAvatar(
                 child: Text(
@@ -26,45 +26,47 @@ class PopulateDrawer {
             onTap: () {},
             child: ListTile(
               onTap: () {
-                Navigator.popAndPushNamed(context, "/home");
+                Navigator.popAndPushNamed(context, "/cabinet");
               },
               leading: Icon(Icons.home, color: Colors.pink),
-              title: Text("Home Page"),
+              title: Text("My Cabinet"),
             ),
           ),
           InkWell(
-            onTap: null,
+            onTap:() {},
             child: ListTile(
               onTap: () {
-                Navigator.popAndPushNamed(context, "/profile");
+                Navigator.popAndPushNamed(context, "/wagers");
               },
-              leading: Icon(Icons.person, color: Colors.black),
-              title: Text("My Profile"),
+              leading: Icon(Icons.description, color: Colors.black),
+              title: Text("My wagers"),
             ),
           ),
           InkWell(
-            onTap: null,
+            onTap:() {},
             child: ListTile(
               onTap: () {
-                Navigator.pushNamed(context, "/news");
+                Navigator.pushNamed(context, "/events");
               },
-              leading: Icon(Icons.shopping_basket, color: Colors.red),
-              title: Text("News"),
+              leading: Icon(Icons.attach_money, color: Colors.red),
+              title: Text("Bet on events"),
             ),
           ),
           Divider(),
           InkWell(
-            onTap: null,
+            onTap:() {
+              Navigator.pushNamed(context, "/coefficients");
+            },
             child: ListTile(
               leading: Icon(Icons.help, color: Colors.green),
-              title: Text("About"),
+              title: Text("About coefficients"),
             ),
           ),
           InkWell(
-            onTap: null,
+            onTap:() {},
             child: ListTile(
               leading: Icon(
-                Icons.power_settings_new,
+                Icons.exit_to_app,
                 color: Colors.black,
               ),
               title: Text("Log out"),

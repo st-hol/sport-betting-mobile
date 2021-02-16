@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import 'package:sport_betting_mobile/api/payload/AccountApi.dart';
+import 'package:sport_betting_mobile/api/AccountApi.dart';
 
 class LoginScreen extends StatefulWidget {
-  final AccountApi accountApi = AccountApi();
+  final AccountService accountApi = AccountService();
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -112,10 +112,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                         BorderRadius.all(Radius.circular(60)),
                                   ),
                                   child: new Center(
-                                    child: new Icon(
-                                      Icons.arrow_downward,
-                                      color: Colors.grey[700],
-                                    ),
+                                    child: InkWell(
+                                        onTap: () {
+                                          _backToLanding(context);
+                                        },
+                                        child: new Icon(
+                                          Icons.arrow_downward,
+                                          color: Colors.grey[700],
+                                        )),
                                   ),
                                 ),
                                 new SizedBox()
@@ -142,4 +146,10 @@ class _LoginScreenState extends State<LoginScreen> {
       //todo show error msg
     }
   }
+
+  void _backToLanding(BuildContext context) {
+    print("back to landing");
+    Navigator.pushNamed(context, '/');
+  }
+
 }

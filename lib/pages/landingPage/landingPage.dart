@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_betting_mobile/api/payload/AccountApi.dart';
+import 'file:///D:/TEMP/study/mob-titenko-2/proj/sport-betting-mobile/lib/api/AccountApi.dart';
 import 'package:sport_betting_mobile/components/drawer.dart';
 
 class LandingScreen extends StatelessWidget {
@@ -23,7 +23,6 @@ class LandingScreen extends StatelessWidget {
     );
 
     return Scaffold(
-        drawer: PopulateDrawer.populateDrawer(context),
         body: Center(
             child: Container(
           decoration: new BoxDecoration(

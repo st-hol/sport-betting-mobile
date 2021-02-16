@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Colors {
+class AppColors {
 
-  const Colors();
+  const AppColors();
 
 
   static const Color appBarTitle = const Color(0xFFFFFFFF);
@@ -20,48 +20,48 @@ class Colors {
 
 }
 
-class Dimens {
-  const Dimens();
+class AppDimens {
+  const AppDimens();
 
   static const planetWidth = 100.0;
   static const planetHeight = 100.0;
 }
 
-class TextStyles {
+class AppTextStyles {
 
-  const TextStyles();
+  const AppTextStyles();
 
   static const TextStyle leagueName = const TextStyle(
-      color: Colors.grey_c7,
-      fontFamily: 'Poppins',
+      color: AppColors.grey_c7,
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400,
       fontSize: 14.0
   );
 
   static const TextStyle teamName = const TextStyle(
-    color: Colors.black,
-    fontFamily: 'Poppins',
+    color: AppColors.black,
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w400,
     fontSize: 14.0
   );
 
   static const TextStyle score = const TextStyle(
-      color: Colors.blue,
-      fontFamily: 'Poppins',
+      color: Colors.pinkAccent,
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.bold,
       fontSize: 15.0
   );
 
   static const TextStyle listDate = const TextStyle(
-      color: Colors.blue,
-      fontFamily: 'Poppins',
+      color:  Colors.pinkAccent,
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w500,
       fontSize: 14.0
   );
 
   static const TextStyle matchTime = const TextStyle(
-      color: Colors.grey_8e,
-      fontFamily: 'Poppins',
+      color: AppColors.grey_8e,
+      fontFamily: 'Montserrat',
       fontWeight: FontWeight.w400,
       fontSize: 14.0
   );
