@@ -5,35 +5,50 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:sport_betting_mobile/api/util/ApiConsts.dart';
 
-import 'package:sport_betting_mobile/api/util/RequestParams.dart';
+import 'package:sport_betting_mobile/model/AccountInfoHolder.dart';
 import 'package:sport_betting_mobile/model/payload/UserResponse.dart';
 
 abstract class AccountApi {
-  Future<UserResponse> getAccountDetails();
+  Future<UserResponse> getAccountDetails(String username, String password);
 }
 
 class AccountService implements AccountApi {
+  Future<bool> processLoginRequest(String username, String password) async {
+    bool successfulLogin = false;
+    //load details
+    UserResponse userResponse = await getAccountDetails(username, password);
 
-  bool processLoginRequest(BuildContext context) {
-    //todo load details
-
-    //todo handle
-    if (true) {
-      Navigator.pushNamed(context, '/cabinet');
-      return true;
+    if (userResponse.errorCode == '') {
+      successfulLogin = true;
+      populateAccountData(userResponse);
     } else {
-      return false;
+      successfulLogin = false;
     }
+    return successfulLogin;
   }
 
-  bool changeInfo(BuildContext context) {}
-
-  Future<UserResponse> getAccountDetails() async {
+  Future<UserResponse> getAccountDetails(
+      String username, String password) async {
     var url = ApiConsts.API_APPLICATION_ENDPOINT + "user/account";
 
-    return await http.get(Uri.encodeFull(url)).then((http.Response response) {
+    username = username.trim();
+    password = password.trim();
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+
+    return await http.get(Uri.encodeFull(url), headers: <String, String>{
+      'authorization': basicAuth
+    }).then((http.Response response) {
       final int statusCode = response.statusCode;
-      final responseBody = json.decode(response.body);
+      var responseBody;
+
+      if (response.body == "") {
+        Map<String, dynamic> respWithCodeOnly = Map<String, dynamic>();
+        respWithCodeOnly['error'] = statusCode;
+        responseBody = respWithCodeOnly;
+      } else {
+        responseBody = json.decode(response.body);
+      }
 
       if (statusCode == ApiConsts.HTTP_OK) {
         return UserResponse.fromJson(responseBody);
@@ -42,4 +57,16 @@ class AccountService implements AccountApi {
       }
     });
   }
+
+  void populateAccountData(UserResponse userResponse) {
+    AccountDetails.id = userResponse.user.id;
+    AccountDetails.name = userResponse.user.name;
+    AccountDetails.email = userResponse.user.email;
+    AccountDetails.city = 'Kyiv'; //todo
+    AccountDetails.country = 'Ukraine'; //todo
+    AccountDetails.balance = userResponse.user.balance;
+    AccountDetails.numOfWagers = userResponse.user.numOfWagers;
+  }
+
+  bool changeInfo(BuildContext context) {}
 }

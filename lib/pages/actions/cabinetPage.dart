@@ -1,7 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:sport_betting_mobile/components/drawer.dart';
+import 'package:sport_betting_mobile/model/AccountInfoHolder.dart';
 
-class CabinetScreen extends StatelessWidget {
+class CabinetScreen extends StatefulWidget {
+  CabinetScreen();
+
+  @override
+  _CabinetScreenState createState() => _CabinetScreenState(
+      AccountDetails.name,
+      AccountDetails.balance,
+      AccountDetails.numOfWagers,
+      AccountDetails.city,
+      AccountDetails.country,
+      AccountDetails.email);
+}
+
+class _CabinetScreenState extends State<CabinetScreen> {
+  String name, balance, numOfWagers, city, country, email;
+
+  _CabinetScreenState(this.name, this.balance, this.numOfWagers, this.city,
+      this.country, this.email);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +50,7 @@ class CabinetScreen extends StatelessWidget {
                 height: 60,
               ),
               Text(
-                "Stanislav Holovachuk",
+                "$name",
                 style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.blueGrey,
@@ -42,7 +61,7 @@ class CabinetScreen extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "Kyiv, Ukraine",
+                "$city, $country",
                 style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.black45,
@@ -53,7 +72,7 @@ class CabinetScreen extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "E-mail: st-hol@gmail.com",
+                "E-mail: $email",
                 style: TextStyle(
                     fontSize: 15.0,
                     color: Colors.black45,
@@ -111,7 +130,7 @@ class CabinetScreen extends StatelessWidget {
                               height: 7,
                             ),
                             Text(
-                              "15",
+                              "$numOfWagers",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
@@ -127,17 +146,17 @@ class CabinetScreen extends StatelessWidget {
                               "Balance",
                               style: TextStyle(
                                   color: Colors.redAccent,
-                                  fontSize: 22.0,
+                                  fontSize: 18.0,
                                   fontWeight: FontWeight.w600),
                             ),
                             SizedBox(
                               height: 7,
                             ),
                             Text(
-                              "2000",
+                              "$balance",
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 22.0,
+                                  fontSize: 18.0,
                                   fontWeight: FontWeight.w300),
                             )
                           ],

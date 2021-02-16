@@ -1,10 +1,24 @@
-class AccountDetails{
+class AccountDetails {
   static String _id;
   static String _name;
-  static String _surname;
   static String _email;
+  static String _password;
   static String _city;
   static String _country;
+  static String _balance;
+  static String _numOfWagers;
+
+  static String get balance => _balance;
+
+  static set balance(String value) {
+    _balance = value;
+  }
+
+  static String get password => _password;
+
+  static set password(String value) {
+    _password = value;
+  }
 
   static String get id => _id;
 
@@ -17,8 +31,6 @@ class AccountDetails{
   static set name(String value) {
     _name = value;
   }
-
-  static String get surname => _surname;
 
   static String get country => _country;
 
@@ -38,7 +50,9 @@ class AccountDetails{
     _email = value;
   }
 
-  static set surname(String value) {
-    _surname = value;
+  static String get numOfWagers => _numOfWagers;
+
+  static set numOfWagers(String value) {
+    _numOfWagers = value;
   }
 }

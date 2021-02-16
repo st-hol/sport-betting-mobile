@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:sport_betting_mobile/api/AccountApi.dart';
 
 class LoginScreen extends StatefulWidget {
-  final AccountService accountApi = AccountService();
+  final AccountService accountService = AccountService();
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -10,11 +10,22 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final loginFieldController = TextEditingController();
+  final passwordFieldController = TextEditingController();
+
+  @override
+  void dispose() {
+    loginFieldController.dispose();
+    passwordFieldController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
+      key: _scaffoldKey,
       body: Directionality(
         textDirection: TextDirection.ltr,
         child: Container(
@@ -55,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 40,
                             ),
                             TextField(
+                              controller: loginFieldController,
                               decoration: InputDecoration(
                                 hintText: "login",
                                 icon: Icon(Icons.person_outline),
@@ -64,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 40,
                             ),
                             TextField(
+                              controller: passwordFieldController,
                               decoration: InputDecoration(
                                 hintText: "password",
                                 icon: Icon(Icons.lock_outline),
@@ -137,13 +150,25 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _attemptLogin(BuildContext context) {
+  void _attemptLogin(BuildContext context) async {
     print("attempt log in");
-    if (widget.accountApi.processLoginRequest(context)) {
-      print("log in success");
+    String login = loginFieldController.text;
+    String password= passwordFieldController.text;
+    bool success = await widget.accountService.processLoginRequest(login, password);
+    if (success) {
+      Navigator.pushNamed(context, '/cabinet');
+      print("login success");
     } else {
-      print("log in failed");
-      //todo show error msg
+      print("login failed");
+      //finally in the topmost code use this key in the following way
+      final snackBar = SnackBar(
+        content: Text('Login attempt failed!'),
+        action: SnackBarAction(
+          label: 'Hide',
+          onPressed: () {},
+        ),
+      );
+      _scaffoldKey.currentState.showSnackBar(snackBar);
     }
   }
 
