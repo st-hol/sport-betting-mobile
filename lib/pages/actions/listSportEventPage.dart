@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sport_betting_mobile/blocks/events_block.dart';
-import 'package:sport_betting_mobile/model/FootballMatch.dart';
+import 'package:sport_betting_mobile/model/SportEvent.dart';
 import 'package:sport_betting_mobile/model/payload/EventsResponse.dart';
+import 'package:sport_betting_mobile/pages/hero/HeroSportEventPopUpPage.dart';
 import 'package:sport_betting_mobile/theme.dart';
 
 class ListEventsScreen extends StatefulWidget {
-
   ListEventsScreen();
 
   @override
@@ -66,14 +66,8 @@ class _ListEventsScreenState extends State<ListEventsScreen> {
             return ListView.builder(
                 itemCount: eventsResponse.events.length,
                 itemBuilder: (BuildContext context, int index) {
-                  EventListItem item = eventsResponse.events[index];
-
-                  if (item is DateItem) {
-                    return getDateHeaderWidget(item.date);
-                  } else if (item is MatchItem) {
-                    return getMatchItemWidget(item.match);
-                  }
-                  return null;
+                  SportEventItem item = eventsResponse.events[index];
+                  return _getSportEventItemWidget(item.sportEvent);
                 });
           }
         }
@@ -101,9 +95,8 @@ class _ListEventsScreenState extends State<ListEventsScreen> {
     );
   }
 
-  Widget getMatchItemWidget(FootballMatch match) {
-    final score =
-        match.match_hometeam_score + " - " + match.match_awayteam_score;
+  Widget _getSportEventItemWidget(SportEvent sportEvent) {
+    final score = "? - ?";
 
     return Container(
         margin: const EdgeInsets.only(
@@ -113,62 +106,62 @@ class _ListEventsScreenState extends State<ListEventsScreen> {
           shape: BoxShape.rectangle,
           borderRadius: new BorderRadius.circular(4.0),
         ),
-        child: Container(
-            child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 10.0, top: 8.0, right: 10.0, bottom: 12.0),
-                child: Column(children: <Widget>[
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          match.league_name,
-                          style: AppTextStyles.leagueName,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 6.0),
-                          child: Text(
-                            match.match_time,
-                            style: AppTextStyles.matchTime,
-                          ),
-                        ),
-                      ]),
-                  Container(
-                      margin: const EdgeInsets.only(top: 8.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            new Flexible(
-                                child: Container(
-                                  alignment: Alignment.centerRight,
-                                  width: double.infinity,
+        child: Hero(
+            tag: sportEvent.id,
+            child: GestureDetector(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            HeroSportEventPopUpPage(sportEvent.id, sportEvent))),
+                child: Container(
+                    child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 10.0, top: 8.0, right: 10.0, bottom: 12.0),
+                        child: Column(children: <Widget>[
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                                  "Start: " + sportEvent.startDate ?? "",
+                                  style: AppTextStyles.leagueName,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 6.0),
                                   child: Text(
-                                    match.match_hometeam_name,
-                                    style: AppTextStyles.teamName,
+                                    "End: " + sportEvent.endDate ?? "",
+                                    style: AppTextStyles.leagueName,
                                   ),
                                 ),
-                                flex: 1),
-                            new Flexible(
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: 60.0,
-                                  child: Text(
-                                    score,
-                                    style: AppTextStyles.score,
-                                  ),
-                                ),
-                                flex: 1),
-                            new Flexible(
-                                child: Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    match.match_awayteam_name,
-                                    style: AppTextStyles.teamName,
-                                  ),
-                                ),
-                                flex: 1),
-                          ])),
-                ]))));
+                              ]),
+                          Container(
+                              margin: const EdgeInsets.only(top: 8.0),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    new Flexible(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          width: 100,
+                                          child: Text(
+                                            (sportEvent.sportType ?? " ") +
+                                                " : ",
+                                            style: AppTextStyles.teamName,
+                                          ),
+                                        ),
+                                        flex: 1),
+                                    new Flexible(
+                                        child: Container(
+                                          alignment: Alignment.centerLeft,
+                                          width: double.infinity,
+                                          child: Text(
+                                            sportEvent.title,
+                                            style: AppTextStyles.score,
+                                          ),
+                                        ),
+                                        flex: 3),
+                                  ])),
+                        ]))))));
   }
 }

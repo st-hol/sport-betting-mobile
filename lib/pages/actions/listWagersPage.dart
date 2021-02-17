@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sport_betting_mobile/blocks/wagers_block.dart';
-import 'package:sport_betting_mobile/model/FootballMatch.dart';
+import 'package:sport_betting_mobile/model/SportEvent.dart';
 import 'package:sport_betting_mobile/model/Wager.dart';
 import 'package:sport_betting_mobile/model/payload/EventsResponse.dart';
 import 'package:sport_betting_mobile/model/payload/WagersResponse.dart';

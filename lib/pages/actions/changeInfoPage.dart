@@ -144,7 +144,6 @@ class _ChangeInfoScreenState extends State<ChangeInfoScreen> {
     print("attempt change info");
     widget.accountService
         .changeInfo(context, nameFieldController.text, emailFieldController.text);
-    //todo model notification
     Navigator.pushNamed(context, '/cabinet');
   }
 

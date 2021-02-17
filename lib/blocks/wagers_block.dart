@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:sport_betting_mobile/api/FootballApi.dart';
+import 'package:sport_betting_mobile/api/SportEventApi.dart';
 import 'package:sport_betting_mobile/api/WagerApi.dart';
 import 'package:sport_betting_mobile/model/Wager.dart';
 import 'dart:async';

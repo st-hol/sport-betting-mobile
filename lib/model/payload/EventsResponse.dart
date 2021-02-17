@@ -1,25 +1,12 @@
-import '../FootballMatch.dart';
+import '../SportEvent.dart';
 import 'BaseResponse.dart';
 
 abstract class EventListItem {}
 
-//Based on:
-//https://flutter.dev/docs/cookbook/lists/mixed-list
+class SportEventItem implements EventListItem {
+  SportEvent sportEvent;
 
-class DateItem implements EventListItem {
-  final String date;
-
-  DateItem(this.date);
-}
-
-class MatchItem implements EventListItem {
-
-  FootballMatch match;
-  bool isLastForDate = false;
-
-  MatchItem(FootballMatch match){
-    this.match = match;
-  }
+  SportEventItem(this.sportEvent);
 }
 
 class EventsResponse extends BaseResponse{
@@ -29,41 +16,17 @@ class EventsResponse extends BaseResponse{
   EventsResponse({this.events}) : super.name('', '');
 
   factory EventsResponse.fromJson(List<dynamic> json) {
+    List<SportEvent> items =
+    json.map((i) => SportEvent.fromJson(i)).toList();
 
-    List<FootballMatch> items = json.map((i)=>FootballMatch.fromJson(i)).toList();
+    List<EventListItem> sportEventList = List<EventListItem>();
 
-    List<EventListItem> eventsList = List<EventListItem>();
-
-    var currentDate;
-    
-    for( var i = 0 ; i < items.length; i++ ) {
-      
-      FootballMatch match = items[i];
-      
-      if(currentDate==null){
-        currentDate = match.match_date;
-        eventsList.add(DateItem(match.match_date));
-        eventsList.add(MatchItem(match));
-      
-      }else{
-
-        var matchItem = MatchItem(match);
-
-        if(currentDate!=match.match_date){
-
-          MatchItem prevItem = eventsList[eventsList.length-1];
-          prevItem.isLastForDate = true;
-
-          eventsList.add(DateItem(match.match_date));
-          currentDate = match.match_date;
-        }
-
-        eventsList.add(matchItem);
-      }      
+    for (var i = 0; i < items.length; i++) {
+      sportEventList.add(SportEventItem(items[i]));
     }
 
     return EventsResponse(
-      events: eventsList,
+      events: sportEventList,
     );
   }
 
