@@ -2,13 +2,21 @@ class AccountDetails {
   static String _id;
   static String _name;
   static String _email;
+  static String _encryptedPassword;
   static String _password;
   static String _city;
   static String _country;
   static String _balance;
   static String _numOfWagers;
 
+
   static String get balance => _balance;
+
+  static String get encryptedPassword => _encryptedPassword;
+
+  static set encryptedPassword(String value) {
+    _encryptedPassword = value;
+  }
 
   static set balance(String value) {
     _balance = value;

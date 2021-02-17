@@ -7,6 +7,6 @@ class BetCoefficient {
   factory BetCoefficient.fromJson(Map<String, dynamic> parsedJson) {
     return BetCoefficient(
         name: parsedJson['name'],
-        coefficient: parsedJson['coefficient']);
+        coefficient: parsedJson['coefficient'].toString());
   }
 }

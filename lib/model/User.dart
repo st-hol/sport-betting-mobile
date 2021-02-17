@@ -1,7 +1,8 @@
 class User {
   final String id;
   final String email;
-  final String password;
+  final String inputPassword;
+  final String encryptedPassword;
   final String name;
   final String balance;
   final String currency;
@@ -11,7 +12,8 @@ class User {
   User(
       {this.id,
       this.email,
-      this.password,
+      this.inputPassword,
+      this.encryptedPassword,
       this.name,
       this.balance,
       this.currency,
@@ -22,7 +24,7 @@ class User {
     return User(
         id: parsedJson['id'].toString(),
         email: parsedJson['email'],
-        password: parsedJson['password'],
+        encryptedPassword: parsedJson['password'],
         name: parsedJson['name'],
         balance: parsedJson['balance'].toString(),
         currency: parsedJson['currency'].toString(),

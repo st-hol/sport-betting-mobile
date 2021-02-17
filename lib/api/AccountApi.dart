@@ -20,7 +20,7 @@ class AccountService implements AccountApi {
 
     if (userResponse.errorCode == '') {
       successfulLogin = true;
-      populateAccountData(userResponse);
+      populateAccountData(userResponse, password);
     } else {
       successfulLogin = false;
     }
@@ -58,10 +58,12 @@ class AccountService implements AccountApi {
     });
   }
 
-  void populateAccountData(UserResponse userResponse) {
+  void populateAccountData(UserResponse userResponse, String inputPassword) {
     AccountDetails.id = userResponse.user.id;
     AccountDetails.name = userResponse.user.name;
     AccountDetails.email = userResponse.user.email;
+    AccountDetails.password = userResponse.user.encryptedPassword;
+    AccountDetails.password = inputPassword;
     AccountDetails.city = 'Kyiv'; //todo
     AccountDetails.country = 'Ukraine'; //todo
     AccountDetails.balance = userResponse.user.balance;

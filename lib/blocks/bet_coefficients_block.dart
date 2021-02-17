@@ -27,7 +27,7 @@ class SeeBetCoefficientsBlock {
 
   static BetCoefficientsResponse _prepareInitial() {
     List<BetCoefficientListItem> list = new List<BetCoefficientListItem>();
-    list.add(BetCoefficientItem(BetCoefficient(name:"bet", coefficient:"0.5")));
+    list.add(BetCoefficientItem(BetCoefficient(name:"bet", coefficient:"0.0")));
     BetCoefficientsResponse  response = BetCoefficientsResponse(betCoeffs: list);
     return response;
   }
