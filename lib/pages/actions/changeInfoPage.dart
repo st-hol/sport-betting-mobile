@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sport_betting_mobile/api/AccountApi.dart';
 
-
 class ChangeInfoScreen extends StatefulWidget {
   final AccountService accountService = AccountService();
 
@@ -11,6 +10,8 @@ class ChangeInfoScreen extends StatefulWidget {
 
 class _ChangeInfoScreenState extends State<ChangeInfoScreen> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+  final nameFieldController = TextEditingController();
+  final emailFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +56,7 @@ class _ChangeInfoScreenState extends State<ChangeInfoScreen> {
                               height: 40,
                             ),
                             TextField(
+                              controller: emailFieldController,
                               decoration: InputDecoration(
                                 hintText: "e-mail",
                                 icon: Icon(Icons.mail_outline),
@@ -64,21 +66,13 @@ class _ChangeInfoScreenState extends State<ChangeInfoScreen> {
                               height: 40,
                             ),
                             TextField(
+                              controller: nameFieldController,
                               decoration: InputDecoration(
                                 hintText: "first name",
                                 icon: Icon(Icons.navigate_next),
                               ),
                             ),
                             Container(
-                              height: 40,
-                            ),
-                            TextField(
-                              decoration: InputDecoration(
-                                hintText: "last name",
-                                icon: Icon(Icons.navigate_next),
-                              ),
-                            ),
-                            SizedBox(
                               height: 40,
                             ),
                             InkWell(
@@ -148,7 +142,10 @@ class _ChangeInfoScreenState extends State<ChangeInfoScreen> {
 
   void _changeInfo(BuildContext context) {
     print("attempt change info");
-    widget.accountService.changeInfo(context);
+    widget.accountService
+        .changeInfo(context, nameFieldController.text, emailFieldController.text);
+    //todo model notification
+    Navigator.pushNamed(context, '/cabinet');
   }
 
   void _backToCabinet(BuildContext context) {

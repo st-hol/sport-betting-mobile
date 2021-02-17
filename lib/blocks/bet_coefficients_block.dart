@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sport_betting_mobile/api/BetCoefficientsApi.dart';
 import 'package:sport_betting_mobile/api/FootballApi.dart';
@@ -12,9 +13,9 @@ class SeeBetCoefficientsBlock {
   final BetCoefficientsService service = BetCoefficientsService();
 
   Stream get coeffs => betCoeffController.stream;
-  BetCoefficientsResponse initialData = _prepareInitial();
+  BetCoefficientsResponse initialData;//= _prepareInitial();
 
-  void getEvents() async {
+  void getBetCoeffs() async {
     BetCoefficientsResponse response = await service.getBetCoefficients();
     if (response != null) {
       betCoeffController.sink.add(response);

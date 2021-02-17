@@ -20,7 +20,7 @@ class _SeeBetCoefficientsScreen extends State<SeeBetCoefficientsScreen> {
   @override
   void initState() {
     super.initState();
-    bloc.getEvents();
+    bloc.getBetCoeffs();
   }
 
   @override

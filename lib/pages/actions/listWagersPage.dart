@@ -22,7 +22,7 @@ class _ListWagersScreenState extends State<ListWagersScreen> {
   @override
   void initState() {
     super.initState();
-    bloc.getEvents();
+    bloc.getWagers();
   }
 
   @override
@@ -97,8 +97,7 @@ class _ListWagersScreenState extends State<ListWagersScreen> {
   }
 
   Widget _getWagerItemWidget(Wager wager) {
-    final amount =
-        ( wager.wager_amount ?? "111") + " " + ( wager.currency ?? "er");
+    final amount = (wager.wager_amount ?? "0") + " " + (wager.currency ?? "");
 
     return Container(
         margin: const EdgeInsets.only(
@@ -118,13 +117,15 @@ class _ListWagersScreenState extends State<ListWagersScreen> {
                       children: <Widget>[
                         Text(
                           wager.event_title ?? "TITLE",
-                          style: AppTextStyles.leagueName,
+                          style: TextStyle(
+                            color: Colors.purple
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 6.0),
                           child: Text(
                             wager.creation_time ?? "TIME",
-                            style: AppTextStyles.matchTime,
+                            style: AppTextStyles.leagueName,
                           ),
                         ),
                       ]),
@@ -138,7 +139,7 @@ class _ListWagersScreenState extends State<ListWagersScreen> {
                                   alignment: Alignment.centerRight,
                                   width: double.infinity,
                                   child: Text(
-                                    wager.bet_type ?? "bet_type",
+                                    wager.bet_type ?? "BET TYPE",
                                     style: AppTextStyles.teamName,
                                   ),
                                 ),
@@ -146,7 +147,7 @@ class _ListWagersScreenState extends State<ListWagersScreen> {
                             new Flexible(
                                 child: Container(
                                   alignment: Alignment.center,
-                                  width: 60.0,
+                                  width: 100.0,
                                   child: Text(
                                     amount,
                                     style: AppTextStyles.score,
@@ -156,14 +157,27 @@ class _ListWagersScreenState extends State<ListWagersScreen> {
                             new Flexible(
                                 child: Container(
                                   width: double.infinity,
-                                  alignment: Alignment.centerLeft,
+                                  alignment: Alignment.centerRight,
                                   child: Text(
-                                    wager.sport_type ?? "sport_type",
+                                    wager.sport_type ?? "SPORT TYPE",
                                     style: AppTextStyles.teamName,
                                   ),
                                 ),
                                 flex: 1),
                           ])),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Outcome is [" + (wager.outcome ?? "TITLE") + "]",
+                          style: TextStyle(
+                              color: Colors.purple
+                          ),
+                        ),
+                      ]),
                 ]))));
   }
 }

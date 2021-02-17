@@ -23,7 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       key: _scaffoldKey,
       body: Directionality(
@@ -153,8 +152,9 @@ class _LoginScreenState extends State<LoginScreen> {
   void _attemptLogin(BuildContext context) async {
     print("attempt log in");
     String login = loginFieldController.text;
-    String password= passwordFieldController.text;
-    bool success = await widget.accountService.processLoginRequest(login, password);
+    String password = passwordFieldController.text;
+    bool success = await widget.accountService
+        .processLoginRequest(context, login, password);
     if (success) {
       Navigator.pushNamed(context, '/cabinet');
       print("login success");
@@ -176,5 +176,4 @@ class _LoginScreenState extends State<LoginScreen> {
     print("back to landing");
     Navigator.pushNamed(context, '/');
   }
-
 }

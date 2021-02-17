@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sport_betting_mobile/api/FootballApi.dart';
 import 'package:sport_betting_mobile/api/WagerApi.dart';
@@ -12,9 +13,9 @@ class WagersBlock {
   final WagerService service = WagerService();
 
   Stream get events => wagersController.stream;
-  WagersResponse initialData = _prepareInitial();
+  WagersResponse initialData;// = _prepareInitial();
 
-  void getEvents() async {
+  void getWagers() async {
     WagersResponse response = await service.getWagersByPerson();
     if (response != null) {
       wagersController.sink.add(response);

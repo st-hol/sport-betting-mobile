@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sport_betting_mobile/api/AccountApi.dart';
+import 'package:sport_betting_mobile/notifier/AccountInfoHolder.dart';
 
 class PopulateDrawer {
+  static AccountService accountService = AccountService();
+
   static Drawer populateDrawer(BuildContext context) {
+    final model = Provider.of<AccountInfoHolder>(context, listen: false);
+
     Drawer drawer = Drawer(
       child: ListView(
         children: <Widget>[
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(color: Colors.pink),
-            accountName: Text("Stanislav"),
-            accountEmail: Text("st-hol@gmail.com"),
+            accountName: Text(model.name),
+            accountEmail: Text(model.email),
             currentAccountPicture: GestureDetector(
               child: CircleAvatar(
                 child: Text(
-                  "AM",
+                  (model.name.length > 1 ? model.name.substring(0, 1) : ""),
                   style: TextStyle(
                       color: Colors.pink,
                       fontSize: 20.0,
@@ -33,7 +40,7 @@ class PopulateDrawer {
             ),
           ),
           InkWell(
-            onTap:() {},
+            onTap: () {},
             child: ListTile(
               onTap: () {
                 Navigator.popAndPushNamed(context, "/wagers");
@@ -43,7 +50,7 @@ class PopulateDrawer {
             ),
           ),
           InkWell(
-            onTap:() {},
+            onTap: () {},
             child: ListTile(
               onTap: () {
                 Navigator.pushNamed(context, "/events");
@@ -54,7 +61,7 @@ class PopulateDrawer {
           ),
           Divider(),
           InkWell(
-            onTap:() {
+            onTap: () {
               Navigator.pushNamed(context, "/coefficients");
             },
             child: ListTile(
@@ -63,7 +70,10 @@ class PopulateDrawer {
             ),
           ),
           InkWell(
-            onTap:() {},
+            onTap: () {
+              accountService.logout(context);
+              Navigator.pushNamed(context, "/");
+            },
             child: ListTile(
               leading: Icon(
                 Icons.exit_to_app,

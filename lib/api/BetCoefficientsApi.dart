@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:sport_betting_mobile/model/AccountInfoHolder.dart';
+import 'package:provider/provider.dart';
 import 'package:sport_betting_mobile/model/payload/BetCoefficientsResponse.dart';
 import 'package:sport_betting_mobile/model/payload/EventsResponse.dart';
+import 'package:sport_betting_mobile/notifier/AccountInfoHolder.dart';
 
 import 'util/ApiConsts.dart';
 import 'util/RequestParams.dart';

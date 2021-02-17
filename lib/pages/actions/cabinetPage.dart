@@ -1,28 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:sport_betting_mobile/components/drawer.dart';
-import 'package:sport_betting_mobile/model/AccountInfoHolder.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sport_betting_mobile/notifier/AccountInfoHolder.dart';
 
 class CabinetScreen extends StatefulWidget {
   CabinetScreen();
 
   @override
-  _CabinetScreenState createState() => _CabinetScreenState(
-      AccountDetails.name,
-      AccountDetails.balance,
-      AccountDetails.numOfWagers,
-      AccountDetails.city,
-      AccountDetails.country,
-      AccountDetails.email);
+  _CabinetScreenState createState() => _CabinetScreenState();
 }
 
 class _CabinetScreenState extends State<CabinetScreen> {
-  String name, balance, numOfWagers, city, country, email;
 
-  _CabinetScreenState(this.name, this.balance, this.numOfWagers, this.city,
-      this.country, this.email);
+  _CabinetScreenState();
 
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<AccountInfoHolder>(context,  listen: false);
+
     return Scaffold(
         drawer: PopulateDrawer.populateDrawer(context),
         body: SafeArea(
@@ -50,7 +46,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
                 height: 60,
               ),
               Text(
-                "$name",
+                model.name,
                 style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.blueGrey,
@@ -61,7 +57,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
                 height: 10,
               ),
               Text(
-                "$city, $country",
+                model.city + ", " + model.country,
                 style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.black45,
@@ -72,7 +68,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
                 height: 10,
               ),
               Text(
-                "E-mail: $email",
+                "E-mail: " + model.email,
                 style: TextStyle(
                     fontSize: 15.0,
                     color: Colors.black45,
@@ -130,7 +126,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
                               height: 7,
                             ),
                             Text(
-                              "$numOfWagers",
+                              model.numOfWagers,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
@@ -153,7 +149,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
                               height: 7,
                             ),
                             Text(
-                              "$balance",
+                              model.balance,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 18.0,
