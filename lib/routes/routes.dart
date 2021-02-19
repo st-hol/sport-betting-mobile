@@ -4,6 +4,7 @@ import 'package:sport_betting_mobile/pages/actions/cabinetPage.dart';
 import 'package:sport_betting_mobile/pages/actions/changeInfoPage.dart';
 import 'package:sport_betting_mobile/pages/actions/listSportEventPage.dart';
 import 'package:sport_betting_mobile/pages/actions/listWagersPage.dart';
+import 'package:sport_betting_mobile/pages/chart/statChartPage.dart';
 import 'package:sport_betting_mobile/pages/loginPage/loginPage.dart';
 import 'package:sport_betting_mobile/pages/splashScreen/splashScreen.dart';
 
@@ -28,11 +29,14 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ListWagersScreen());
       case '/coefficients':
         return MaterialPageRoute(builder: (_) => SeeBetCoefficientsScreen());
+      case '/chart':
+        return MaterialPageRoute(
+            builder: (_) =>  StatisticBarChartScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => UndefinedView(
-              name: settings.name,
-            ));
+                  name: settings.name,
+                ));
     }
   }
 }

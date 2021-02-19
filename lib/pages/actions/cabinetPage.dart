@@ -12,12 +12,11 @@ class CabinetScreen extends StatefulWidget {
 }
 
 class _CabinetScreenState extends State<CabinetScreen> {
-
   _CabinetScreenState();
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<AccountInfoHolder>(context,  listen: false);
+    final model = Provider.of<AccountInfoHolder>(context, listen: false);
 
     return Scaffold(
         drawer: PopulateDrawer.populateDrawer(context),
@@ -173,27 +172,32 @@ class _CabinetScreenState extends State<CabinetScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80.0),
                     ),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [Colors.pink, Colors.redAccent]),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: Container(
-                        constraints: BoxConstraints(
-                          maxWidth: 100.0,
-                          maxHeight: 40.0,
+                    child: InkWell(
+                      onTap: () {
+                        _toChartScreen(context);
+                      },
+                      child: Ink(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [Colors.pink, Colors.redAccent]),
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "see statistic",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.0,
-                              letterSpacing: 2.0,
-                              fontWeight: FontWeight.w300),
+                        child: Container(
+                          constraints: BoxConstraints(
+                            maxWidth: 100.0,
+                            maxHeight: 40.0,
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            "see statistic",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12.0,
+                                letterSpacing: 2.0,
+                                fontWeight: FontWeight.w300),
+                          ),
                         ),
                       ),
                     ),
@@ -207,5 +211,9 @@ class _CabinetScreenState extends State<CabinetScreen> {
 
   void _toChangeInfoScreen(BuildContext context) {
     Navigator.pushNamed(context, '/change-info');
+  }
+
+  void _toChartScreen(BuildContext context) {
+    Navigator.pushNamed(context, '/chart');
   }
 }
