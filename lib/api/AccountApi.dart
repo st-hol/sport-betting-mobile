@@ -69,15 +69,7 @@ class AccountService implements AccountApi {
 
   void populateAccountData(
       BuildContext context, UserResponse userResponse, String inputPassword) {
-    // AccountDetails.id = userResponse.user.id;
-    // AccountDetails.name = userResponse.user.name;
-    // AccountDetails.email = userResponse.user.email;
-    // AccountDetails.password = userResponse.user.encryptedPassword;
-    // AccountDetails.password = inputPassword;
-    // AccountDetails.city = 'Kyiv'; //todo
-    // AccountDetails.country = 'Ukraine'; //todo
-    // AccountDetails.balance = userResponse.user.balance;
-    // AccountDetails.numOfWagers = userResponse.user.numOfWagers;
+
     final model = Provider.of<AccountInfoHolder>(context, listen: false);
     model.id = userResponse.user.id;
     model.name = userResponse.user.name;
@@ -119,7 +111,7 @@ class AccountService implements AccountApi {
         .then((http.Response response) {
       if (response.statusCode == ApiConsts.HTTP_OK) {
         model.name = name;
-        model.email = username;
+        model.email = email;
         return true;
       }
       return false;
