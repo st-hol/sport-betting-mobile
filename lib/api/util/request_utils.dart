@@ -3,7 +3,7 @@ import 'RequestParams.dart';
 
 String _composeUrl(RequestParams params){
 
-  var url = ApiConsts.API_FOOTBALL_ENDPOINT;
+  var url = ApiConsts.API_APPLICATION_ENDPOINT;
 
   if(params!=null) {
 
@@ -18,7 +18,7 @@ String _composeUrl(RequestParams params){
       i++;
     });
 
-    url = url + "&APIkey=" + ApiConsts.API_FOOTBALL_KEY;
+    // url = url + "&APIkey=" + ApiConsts.API_FOOTBALL_KEY;
 
   }
   return url;

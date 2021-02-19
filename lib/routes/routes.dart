@@ -5,7 +5,6 @@ import 'package:sport_betting_mobile/pages/actions/cabinetPage.dart';
 import 'package:sport_betting_mobile/pages/actions/changeInfoPage.dart';
 import 'package:sport_betting_mobile/pages/actions/listSportEventPage.dart';
 import 'package:sport_betting_mobile/pages/actions/listWagersPage.dart';
-import 'package:sport_betting_mobile/pages/actions/makeBetPage.dart';
 import 'package:sport_betting_mobile/pages/loginPage/loginPage.dart';
 import 'package:sport_betting_mobile/pages/splashScreen/splashScreen.dart';
 
@@ -28,8 +27,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => ChangeInfoScreen());
       case '/events':
         return MaterialPageRoute(builder: (_) => ListEventsScreen());
-      case '/make-bet':
-        return MaterialPageRoute(builder: (_) => MakeBetScreen());
       case '/wagers':
         return MaterialPageRoute(builder: (_) => ListWagersScreen());
       case '/coefficients':
