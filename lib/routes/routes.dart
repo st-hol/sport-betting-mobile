@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sport_betting_mobile/pages/actions/balancePage.dart';
 import 'package:sport_betting_mobile/pages/actions/betCoefficientsPage.dart';
 import 'package:sport_betting_mobile/pages/actions/cabinetPage.dart';
 import 'package:sport_betting_mobile/pages/actions/changeInfoPage.dart';
@@ -21,8 +20,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case '/cabinet':
         return MaterialPageRoute(builder: (_) => CabinetScreen());
-      case '/balance':
-        return MaterialPageRoute(builder: (_) => SeeBalanceScreen());
       case '/change-info':
         return MaterialPageRoute(builder: (_) => ChangeInfoScreen());
       case '/events':
