@@ -52,8 +52,13 @@ class BetService implements BetApi {
             body: jsonStr)
         .then((http.Response response) {
       if (response.statusCode == ApiConsts.HTTP_OK) {
+        //upd wagers
         int numOfWagersNum = int.parse(model.numOfWagers) + 1;
         model.numOfWagers = (numOfWagersNum).toString();
+
+        //upd balance
+        double bal = double.parse(model.balance) - amountNum;
+        model.balance = (bal).toString();
         return true;
       }
       return false;

@@ -6,8 +6,7 @@ class HeroSportEventPopUpPage extends StatelessWidget {
   final String tagIdSportEvent;
   final SportEvent sportEvent;
 
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final BetService betService = new BetService();
 
   final firstTeamFieldController = TextEditingController();
@@ -92,7 +91,7 @@ class HeroSportEventPopUpPage extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    _changeInfo(context);
+                                    _makeBet(context);
                                   },
                                   child: new Container(
                                     width: 300,
@@ -157,8 +156,8 @@ class HeroSportEventPopUpPage extends StatelessWidget {
     );
   }
 
-  void _changeInfo(BuildContext context) async {
-    print("attempt change info");
+  void _makeBet(BuildContext context) async {
+    print("attempt make bet");
     bool result = await betService.makeBet(
         context,
         firstTeamFieldController.text,

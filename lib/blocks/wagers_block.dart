@@ -12,7 +12,7 @@ class WagersBlock {
   final wagersController = PublishSubject();
   final WagerService service = WagerService();
 
-  Stream get events => wagersController.stream;
+  Stream get wagers => wagersController.stream;
   WagersResponse initialData;// = _prepareInitial();
 
   void getWagers() async {

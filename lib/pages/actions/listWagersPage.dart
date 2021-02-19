@@ -39,7 +39,7 @@ class _ListWagersScreenState extends State<ListWagersScreen> {
         ),
         body: Container(
           decoration: new BoxDecoration(color: AppColors.grey_f8),
-          child: getListViewEvents(),
+          child: getListViewWagers(),
         ));
   }
 
@@ -49,9 +49,9 @@ class _ListWagersScreenState extends State<ListWagersScreen> {
     );
   }
 
-  Widget getListViewEvents() {
+  Widget getListViewWagers() {
     return StreamBuilder(
-      stream: bloc.events,
+      stream: bloc.wagers,
       initialData: bloc.initialData,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {

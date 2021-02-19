@@ -37,7 +37,7 @@ class _SeeBetCoefficientsScreen extends State<SeeBetCoefficientsScreen> {
         ),
         body: Container(
           decoration: new BoxDecoration(color: AppColors.grey_f8),
-          child: getListViewEvents(),
+          child: getListViewCoefficients(),
         ));
   }
 
@@ -47,7 +47,7 @@ class _SeeBetCoefficientsScreen extends State<SeeBetCoefficientsScreen> {
     );
   }
 
-  Widget getListViewEvents() {
+  Widget getListViewCoefficients() {
     return StreamBuilder(
       stream: bloc.coeffs,
       initialData: bloc.initialData,
