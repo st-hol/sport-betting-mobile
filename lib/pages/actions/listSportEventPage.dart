@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:sport_betting_mobile/blocks/events_block.dart';
 import 'package:sport_betting_mobile/model/SportEvent.dart';
 import 'package:sport_betting_mobile/model/payload/EventsResponse.dart';
@@ -75,17 +74,6 @@ class _ListEventsScreenState extends State<ListEventsScreen> {
     );
   }
 
-  Widget getDateHeaderWidget(String date) {
-    return Container(
-      margin:
-          const EdgeInsets.only(left: 32.0, top: 6.0, right: 16.0, bottom: 6.0),
-      child: Text(
-        new DateFormat.yMMMd().format(DateTime.parse(date)),
-        style: AppTextStyles.listDate,
-      ),
-    );
-  }
-
   Widget getErrorWidget(String error) {
     return Center(
       child: Text(
@@ -96,7 +84,6 @@ class _ListEventsScreenState extends State<ListEventsScreen> {
   }
 
   Widget _getSportEventItemWidget(SportEvent sportEvent) {
-    final score = "? - ?";
 
     return Container(
         margin: const EdgeInsets.only(
