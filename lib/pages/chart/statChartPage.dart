@@ -9,39 +9,20 @@ class StatisticBarChartScreen extends StatefulWidget {
   final WagerService wagerService = WagerService();
   StatisticBarChartScreen();
 
-  /// Create series list with single series
-  List<charts.Series<WagerDateToAmountData, String>> _createSampleData() {
-    final globalSalesData = [
-      new WagerDateToAmountData('2014', 500),
-      new WagerDateToAmountData('2015', 2500),
-      new WagerDateToAmountData('2016', 10000),
-      new WagerDateToAmountData('2017', 7500),
-    ];
-
-    return [
-      new charts.Series<WagerDateToAmountData, String>(
-        id: 'Id',
-        colorFn: (_, __) => charts.MaterialPalette.indigo.shadeDefault,
-        domainFn: (WagerDateToAmountData sales, _) => sales.date,
-        measureFn: (WagerDateToAmountData sales, _) => sales.amount,
-        data: globalSalesData,
-      ),
-    ];
-  }
 
   @override
   _StatisticBarChartScreenState createState() => _StatisticBarChartScreenState(
-      _createSampleData(), animate:true
+      animate:true
   );
 }
 
 class _StatisticBarChartScreenState extends State<StatisticBarChartScreen> {
-  final List<charts.Series> seriesList;
+  List<charts.Series> seriesList;
   final bool animate;
 
   final bloc = WagersBlock();
 
-  _StatisticBarChartScreenState(this.seriesList, {this.animate});
+  _StatisticBarChartScreenState({this.animate});
 
   @override
   void initState() {
@@ -110,15 +91,15 @@ class _StatisticBarChartScreenState extends State<StatisticBarChartScreen> {
                   child: CircularProgressIndicator(),
                 );
               } else {
-                List <WagerDateToAmountData> globalSalesData = [];
-                int totalAmount = 0;
+
+                List <WagerDateToAmountData> globalData = [];
+
                 WagersResponse wagerReps = snapshot.data;
                 wagerReps.wagers.forEach((wagerListItem) {
                   WagerItem wagerItem = wagerListItem as WagerItem;
                   Wager wager = wagerItem.wager;
                   int wagerAmount = double.parse(wager.wager_amount).round();
-                  totalAmount += wagerAmount;
-                  globalSalesData.add(new WagerDateToAmountData(
+                  globalData.add(new WagerDateToAmountData(
                       wager.creation_time.substring(0, 10) + "\n" + wager.creation_time.substring(11),
                       wagerAmount));
                 });
@@ -128,9 +109,9 @@ class _StatisticBarChartScreenState extends State<StatisticBarChartScreen> {
                   new charts.Series<WagerDateToAmountData, String>(
                     id: 'Id',
                     colorFn: (_, __) => charts.MaterialPalette.indigo.shadeDefault,
-                    domainFn: (WagerDateToAmountData sales, _) => sales.date,
-                    measureFn: (WagerDateToAmountData sales, _) => sales.amount,
-                    data: globalSalesData,
+                    domainFn: (WagerDateToAmountData wagerData, _) => wagerData.date,
+                    measureFn: (WagerDateToAmountData wagerData, _) => wagerData.amount,
+                    data: globalData,
                   ),
                 ];
 
@@ -201,39 +182,3 @@ class WagerDateToAmountData {
 
   WagerDateToAmountData(this.date, this.amount);
 }
-
-
-
-// _StatisticBarChartScreenState fromWagers() {
-//   List<WagerDateToAmountData> globalSalesData = [];
-//   //
-//   // WagersResponse wagerReps = widget.wagerService.getWagersByPerson();
-//   // wagerReps.wagers.forEach((wagerListItem) {
-//   //   WagerItem wagerItem = wagerListItem as WagerItem;
-//   //   Wager wager = wagerItem.wager;
-//   //   globalSalesData.add(new WagerDateToAmountData(
-//   //       wager.creation_time, double.parse(wager.wager_amount).round()));
-//   // });
-//
-//   List<charts.Series<WagerDateToAmountData, String>> wagerSeriesList;
-//   wagerSeriesList = [
-//     new charts.Series<WagerDateToAmountData, String>(
-//       id: 'Global Revenue',
-//       colorFn: (_, __) => charts.MaterialPalette.indigo.shadeDefault,
-//       domainFn: (WagerDateToAmountData sales, _) => sales.date,
-//       measureFn: (WagerDateToAmountData sales, _) => sales.amount,
-//       data: globalSalesData,
-//     ),
-//   ];
-//
-//   return new _StatisticBarChartScreenState(
-//     wagerSeriesList,
-//     animate: true,
-//   );
-// }
-// factory _StatisticBarChartScreenState.withSampleData() {
-//   return new _StatisticBarChartScreenState(
-//     _createSampleData(),
-//     animate: true,
-//   );
-// }
