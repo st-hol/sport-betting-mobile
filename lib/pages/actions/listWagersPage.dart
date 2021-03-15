@@ -97,7 +97,7 @@ class _ListWagersScreenState extends State<ListWagersScreen> {
   }
 
   Widget _getWagerItemWidget(Wager wager) {
-    final amount = (wager.wager_amount ?? "0") + " " + (wager.currency ?? "");
+    final amount = (wager.wager_amount ?? "0") + " points";
 
     return Container(
         margin: const EdgeInsets.only(
