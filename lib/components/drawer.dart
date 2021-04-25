@@ -55,7 +55,7 @@ class PopulateDrawer {
               onTap: () {
                 Navigator.pushNamed(context, "/events");
               },
-              leading: Icon(Icons.attach_money, color: Colors.red),
+              leading: Icon(Icons.add_circle_outline, color: Colors.red),
               title: Text("Bet on events"),
             ),
           ),
