@@ -52,32 +52,45 @@ class _StatisticBarChartScreenState extends State<StatisticBarChartScreen> {
                     children: [
                       new Center(
                         child: new Text(
-                          'Graph show total wastes for all time...',
+                          'Graph show total points wasted for all time...',
                           textAlign: TextAlign.center,
                           style: new TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.redAccent,
-                              fontSize: 20.0),
+                              fontSize: 17.0),
                         ),
                       ),
+                      new Spacer(),
+                      // new Center(
+                      //   child: new Text(
+                      //     'This chart shows how much money you could have wasted on betting in real life.',
+                      //     textAlign: TextAlign.center,
+                      //     style: new TextStyle(
+                      //         color: hexToColor("#F2A03D"), fontSize: 17.0),
+                      //   ),
+                      // ),
                       new Center(
                         child: new Text(
-                          'This chart showed to demonstrate how much money you wasted on betting.',
-                          textAlign: TextAlign.center,
-                          style: new TextStyle(
-                              color: hexToColor("#F2A03D"), fontSize: 20.0),
-                        ),
-                      ),
-                      new Center(
-                        child: new Text(
-                          'Please stop wasting money on sport!\n'
+                          'Please do not waste real money on sport! '
                           'It causes addiction.'
-                          '\nWe encourage users not to do that!',
+                          ' We encourage users not to do that!',
                           textAlign: TextAlign.center,
                           style: new TextStyle(
                               fontWeight: FontWeight.bold,
                               color: hexToColor("#F2A03D"),
-                              fontSize: 20.0),
+                              fontSize: 17.0),
+                        ),
+                      ),
+                      new Spacer(),
+                      new Center(
+                        child: new Text(
+                          'Remember: its better to waste POINTS in this app\n'
+                              'instead of wasting REAL money in your life!',
+                          textAlign: TextAlign.center,
+                          style: new TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.indigo,
+                              fontSize: 17.0),
                         ),
                       ),
                     ]),
